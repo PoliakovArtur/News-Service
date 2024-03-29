@@ -1,0 +1,19 @@
+spring:
+  main:
+    allow-circular-references: true
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: create
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/postgres}
+    username: ${DB_USERNAME:postgres}
+    password: ${DB_PASSWORD:postgres}
+    hikari:
+      schema: news_schema
+      connection-init-sql: CREATE SCHEMA IF NOT EXISTS news_schema
+endpoint:
+  user: ${USER_EP:api/v1/user}
+  category: ${CATEGORY_EP:api/v1/category}
+  news: ${NEWS_EP:api/v1/news}
+  comment: ${COMMENT_EP:api/v1/comment}

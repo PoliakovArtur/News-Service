@@ -1,0 +1,5 @@
+endpoint:
+  user: ${USER_EP:/api/v1/user}
+  category: ${CATEGORY_EP:/api/v1/category}
+  news: ${NEWS_EP:/api/v1/news}
+  comment: ${COMMENT_EP:/api/v1/comment}
