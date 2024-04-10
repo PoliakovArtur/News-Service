@@ -6,19 +6,19 @@ import com.example.filter.impl.CategoryFilter;
 
 public class CategoryRequestExamples {
 
-    public final static CreateCategoryRequest VALID_CREATE_SPORT_CATEGORY_REQUEST = CreateCategoryRequest.builder()
+    public final static CreateCategoryRequest VALID_CREATE_CATEGORY_REQUEST = CreateCategoryRequest.builder()
             .title("Sport")
             .description("News about Sport")
             .userId(1L)
             .build();
 
-    public final static CreateCategoryRequest INVALID_CREATE_SPORT_CATEGORY_REQUEST = CreateCategoryRequest.builder()
+    public final static CreateCategoryRequest INVALID_CREATE_CATEGORY_REQUEST = CreateCategoryRequest.builder()
             .title("    ")
             .description("News about Sport")
             .userId(1L)
             .build();
 
-    public final static UpdateCategoryRequest VALID_UPDATE_SPORT_CATEGORY_REQUEST = UpdateCategoryRequest.builder()
+    public final static UpdateCategoryRequest VALID_UPDATE_CATEGORY_REQUEST = UpdateCategoryRequest.builder()
             .userId(1L)
             .description("News about sport and athletes")
             .build();

@@ -8,7 +8,7 @@ import java.util.List;
 
 public class CategoryResponseExamples {
 
-    public final static FullCategoryResponse FULL_SPORT_CATEGORY_RESPONSE = FullCategoryResponse.builder()
+    public final static FullCategoryResponse FULL_CATEGORY_RESPONSE = FullCategoryResponse.builder()
             .id(1L)
             .title("Sport")
             .description("News about Sport")
@@ -17,7 +17,7 @@ public class CategoryResponseExamples {
             .updateAt(LocalDateTime.of(2022, 3, 22, 0, 0, 0))
             .build();
 
-    public final static ShortCategoryResponse SHORT_SPORT_CATEGORY_RESPONSE = ShortCategoryResponse.builder()
+    public final static ShortCategoryResponse SHORT_CATEGORY_RESPONSE = ShortCategoryResponse.builder()
             .id(1L)
             .title("Sport")
             .description("News about Sport")
@@ -25,9 +25,9 @@ public class CategoryResponseExamples {
             .createAt(LocalDateTime.of(2022, 3, 22, 0, 0, 0))
             .build();
 
-    public final static List<ShortCategoryResponse> SHORT_CATEGORY_RESPONSE_LIST = List.of(SHORT_SPORT_CATEGORY_RESPONSE);
+    public final static List<ShortCategoryResponse> SHORT_CATEGORY_RESPONSE_LIST = List.of(SHORT_CATEGORY_RESPONSE);
 
-    public final static ShortCategoryResponse SHORT_UPDATED_SPORT_CATEGORY_RESPONSE = ShortCategoryResponse.builder()
+    public final static ShortCategoryResponse SHORT_UPDATED_CATEGORY_RESPONSE = ShortCategoryResponse.builder()
             .id(1L)
             .title("Sport")
             .description("News about sport and athletes")

@@ -10,8 +10,8 @@ import static com.example.entity_examples.comment.CommentRequestExamples.INVALID
 import static com.example.entity_examples.comment.CommentRequestExamples.INVALID_UPDATE_COMMENT_REQUEST;
 import static com.example.entity_examples.comment.CommentRequestExamples.VALID_CREATE_COMMENT_REQUEST;
 import static com.example.entity_examples.comment.CommentRequestExamples.VALID_UPDATE_COMMENT_REQUEST;
-import static com.example.entity_examples.comment.CommentResponseExamples.SPORT_NEWS_COMMENT_RESPONSE;
-import static com.example.entity_examples.comment.CommentResponseExamples.SPORT_NEWS_COMMENTS_RESPONSE_LIST;
+import static com.example.entity_examples.comment.CommentResponseExamples.COMMENT_RESPONSE;
+import static com.example.entity_examples.comment.CommentResponseExamples.COMMENT_RESPONSE_LIST;
 import static com.example.entity_examples.comment.CommentResponseExamples.UPDATED_COMMENT_RESPONSE;
 import static com.example.util.MockMvcUtils.createUrl;
 import static org.mockito.ArgumentMatchers.any;
@@ -33,9 +33,9 @@ public class CommentControllerTest extends MockMvcTest {
 
     @Test
     void findById_shouldReturn200() throws Exception {
-        when(facade.findById(1L)).thenReturn(SPORT_NEWS_COMMENT_RESPONSE);
+        when(facade.findById(1L)).thenReturn(COMMENT_RESPONSE);
 
-        expectBodyFromGet(createUrl(COMMENT_EP, ID), OK, SPORT_NEWS_COMMENT_RESPONSE);
+        expectBodyFromGet(createUrl(COMMENT_EP, ID), OK, COMMENT_RESPONSE);
         verify(facade, times(1)).findById(1L);
     }
 
@@ -54,9 +54,9 @@ public class CommentControllerTest extends MockMvcTest {
 
     @Test
     void findByNews_shouldReturn200() throws Exception {
-        when(facade.findByNews(1L)).thenReturn(SPORT_NEWS_COMMENTS_RESPONSE_LIST);
+        when(facade.findByNews(1L)).thenReturn(COMMENT_RESPONSE_LIST);
 
-        expectBodyFromGet(COMMENT_EP, OK, SPORT_NEWS_COMMENTS_RESPONSE_LIST, "newsId", "1");
+        expectBodyFromGet(COMMENT_EP, OK, COMMENT_RESPONSE_LIST, "newsId", "1");
         verify(facade, times(1)).findByNews(1L);
     }
 
@@ -74,9 +74,9 @@ public class CommentControllerTest extends MockMvcTest {
 
     @Test
     void save_shouldReturn201() throws Exception {
-        when(facade.save(VALID_CREATE_COMMENT_REQUEST)).thenReturn(SPORT_NEWS_COMMENT_RESPONSE);
+        when(facade.save(VALID_CREATE_COMMENT_REQUEST)).thenReturn(COMMENT_RESPONSE);
 
-        expectBodyFromPost(COMMENT_EP, VALID_CREATE_COMMENT_REQUEST, CREATED, SPORT_NEWS_COMMENT_RESPONSE);
+        expectBodyFromPost(COMMENT_EP, VALID_CREATE_COMMENT_REQUEST, CREATED, COMMENT_RESPONSE);
         verify(facade, times(1)).save(VALID_CREATE_COMMENT_REQUEST);
     }
 

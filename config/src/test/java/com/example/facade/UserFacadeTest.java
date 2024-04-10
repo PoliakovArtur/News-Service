@@ -13,17 +13,17 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
 
-import static com.example.entity_examples.user.UserDbExamples.FIRST_PAGE;
-import static com.example.entity_examples.user.UserDbExamples.JOHN_DOE;
-import static com.example.entity_examples.user.UserDbExamples.JOHN_DOE_AFTER_MAPPING;
-import static com.example.entity_examples.user.UserDbExamples.UPDATED_JOHN_DOE;
-import static com.example.entity_examples.user.UserDbExamples.UPDATE_JOHN_DOE_AFTER_MAPPING;
+import static com.example.entity_examples.user.UserDbExamples.USER_PAGE;
+import static com.example.entity_examples.user.UserDbExamples.USER;
+import static com.example.entity_examples.user.UserDbExamples.USER_AFTER_MAPPING;
+import static com.example.entity_examples.user.UserDbExamples.UPDATED_USER;
+import static com.example.entity_examples.user.UserDbExamples.UPDATE_USER_AFTER_MAPPING;
 import static com.example.entity_examples.user.UserRequestExamples.SIMPLE_USER_FILTER;
-import static com.example.entity_examples.user.UserRequestExamples.VALID_CREATE_JOHN_DOE_REQUEST;
-import static com.example.entity_examples.user.UserRequestExamples.VALID_UPDATE_JOHN_DOE_REQUEST;
-import static com.example.entity_examples.user.UserResponseExamples.CREATED_JOHN_DOE_RESPONSE;
-import static com.example.entity_examples.user.UserResponseExamples.UPDATED_JOHN_DOE_RESPONSE;
-import static com.example.entity_examples.user.UserResponseExamples.USER_INFO_RESPONSE_LIST;
+import static com.example.entity_examples.user.UserRequestExamples.VALID_CREATE_USER_REQUEST;
+import static com.example.entity_examples.user.UserRequestExamples.VALID_UPDATE_USER_REQUEST;
+import static com.example.entity_examples.user.UserResponseExamples.CREATED_USER_RESPONSE;
+import static com.example.entity_examples.user.UserResponseExamples.UPDATED_USER_RESPONSE;
+import static com.example.entity_examples.user.UserResponseExamples.USER_RESPONSE_LIST;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -43,37 +43,37 @@ class UserFacadeTest {
 
     @Test
     void findAll() {
-        when(service.findAll(SIMPLE_USER_FILTER)).thenReturn(FIRST_PAGE);
+        when(service.findAll(SIMPLE_USER_FILTER)).thenReturn(USER_PAGE);
         List<UserResponse> actual = facade.findAll(SIMPLE_USER_FILTER);
 
-        assertEquals(USER_INFO_RESPONSE_LIST, actual);
+        assertEquals(USER_RESPONSE_LIST, actual);
         verify(service, times(1)).findAll(SIMPLE_USER_FILTER);
     }
 
     @Test
     void findById() {
-        when(service.findById(1L)).thenReturn(JOHN_DOE);
+        when(service.findById(1L)).thenReturn(USER);
         UserResponse actual = facade.findById(1L);
 
-        assertEquals(CREATED_JOHN_DOE_RESPONSE, actual);
+        assertEquals(CREATED_USER_RESPONSE, actual);
         verify(service, times(1)).findById(1L);
     }
 
     @Test
     void save() {
-        when(service.save(JOHN_DOE_AFTER_MAPPING)).thenReturn(JOHN_DOE);
-        UserResponse actual = facade.save(VALID_CREATE_JOHN_DOE_REQUEST);
+        when(service.save(USER_AFTER_MAPPING)).thenReturn(USER);
+        UserResponse actual = facade.save(VALID_CREATE_USER_REQUEST);
 
-        assertEquals(CREATED_JOHN_DOE_RESPONSE, actual);
-        verify(service, times(1)).save(JOHN_DOE_AFTER_MAPPING);
+        assertEquals(CREATED_USER_RESPONSE, actual);
+        verify(service, times(1)).save(USER_AFTER_MAPPING);
     }
 
     @Test
     void update() {
-        when(service.updateById(1L, UPDATE_JOHN_DOE_AFTER_MAPPING)).thenReturn(UPDATED_JOHN_DOE);
-        UserResponse actual = facade.updateById(1L, VALID_UPDATE_JOHN_DOE_REQUEST);
+        when(service.updateById(1L, UPDATE_USER_AFTER_MAPPING)).thenReturn(UPDATED_USER);
+        UserResponse actual = facade.updateById(1L, VALID_UPDATE_USER_REQUEST);
 
-        assertEquals(UPDATED_JOHN_DOE_RESPONSE, actual);
-        verify(service, times(1)).updateById(1L, UPDATE_JOHN_DOE_AFTER_MAPPING);
+        assertEquals(UPDATED_USER_RESPONSE, actual);
+        verify(service, times(1)).updateById(1L, UPDATE_USER_AFTER_MAPPING);
     }
 }

@@ -8,13 +8,13 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 
 import static com.example.entity_examples.user.UserJsonExamples.INVALID_UPDATE_USER_JSON;
 import static com.example.entity_examples.user.UserJsonExamples.VALID_UPDATE_USER_JSON;
-import static com.example.entity_examples.user.UserRequestExamples.INVALID_CREATE_JOHN_DOE_REQUEST;
+import static com.example.entity_examples.user.UserRequestExamples.INVALID_CREATE_USER_REQUEST;
 import static com.example.entity_examples.user.UserRequestExamples.SIMPLE_USER_FILTER;
-import static com.example.entity_examples.user.UserRequestExamples.VALID_CREATE_JOHN_DOE_REQUEST;
-import static com.example.entity_examples.user.UserRequestExamples.VALID_UPDATE_JOHN_DOE_REQUEST;
-import static com.example.entity_examples.user.UserResponseExamples.CREATED_JOHN_DOE_RESPONSE;
-import static com.example.entity_examples.user.UserResponseExamples.UPDATED_JOHN_DOE_RESPONSE;
-import static com.example.entity_examples.user.UserResponseExamples.USER_INFO_RESPONSE_LIST;
+import static com.example.entity_examples.user.UserRequestExamples.VALID_CREATE_USER_REQUEST;
+import static com.example.entity_examples.user.UserRequestExamples.VALID_UPDATE_USER_REQUEST;
+import static com.example.entity_examples.user.UserResponseExamples.CREATED_USER_RESPONSE;
+import static com.example.entity_examples.user.UserResponseExamples.UPDATED_USER_RESPONSE;
+import static com.example.entity_examples.user.UserResponseExamples.USER_RESPONSE_LIST;
 import static com.example.util.MockMvcUtils.createUrl;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doThrow;
@@ -35,9 +35,9 @@ class UserControllerTest extends MockMvcTest {
 
     @Test
     void findById_shouldReturn200() throws Exception {
-        when(facade.findById(1L)).thenReturn(CREATED_JOHN_DOE_RESPONSE);
+        when(facade.findById(1L)).thenReturn(CREATED_USER_RESPONSE);
 
-        expectBodyFromGet(createUrl(USER_EP, ID), OK, CREATED_JOHN_DOE_RESPONSE);
+        expectBodyFromGet(createUrl(USER_EP, ID), OK, CREATED_USER_RESPONSE);
         verify(facade, times(1)).findById(1L);
     }
 
@@ -56,9 +56,9 @@ class UserControllerTest extends MockMvcTest {
 
     @Test
     void findAll_shouldReturn200() throws Exception {
-        when(facade.findAll(SIMPLE_USER_FILTER)).thenReturn(USER_INFO_RESPONSE_LIST);
+        when(facade.findAll(SIMPLE_USER_FILTER)).thenReturn(USER_RESPONSE_LIST);
 
-        expectBodyFromGet(USER_EP, OK, USER_INFO_RESPONSE_LIST, "pageSize", "1", "pageNumber", "0");
+        expectBodyFromGet(USER_EP, OK, USER_RESPONSE_LIST, "pageSize", "1", "pageNumber", "0");
         verify(facade, times(1)).findAll(SIMPLE_USER_FILTER);
     }
 
@@ -78,31 +78,31 @@ class UserControllerTest extends MockMvcTest {
 
     @Test
     void save_shouldReturn201() throws Exception {
-        when(facade.save(VALID_CREATE_JOHN_DOE_REQUEST)).thenReturn(CREATED_JOHN_DOE_RESPONSE);
+        when(facade.save(VALID_CREATE_USER_REQUEST)).thenReturn(CREATED_USER_RESPONSE);
 
-        expectBodyFromPost(USER_EP, VALID_CREATE_JOHN_DOE_REQUEST, CREATED, CREATED_JOHN_DOE_RESPONSE);
-        verify(facade, times(1)).save(VALID_CREATE_JOHN_DOE_REQUEST);
+        expectBodyFromPost(USER_EP, VALID_CREATE_USER_REQUEST, CREATED, CREATED_USER_RESPONSE);
+        verify(facade, times(1)).save(VALID_CREATE_USER_REQUEST);
     }
 
     @Test
     void saveWithInvalidEmail_shouldReturn400() throws Exception {
-        expectMessageFromPost(USER_EP, INVALID_CREATE_JOHN_DOE_REQUEST, BAD_REQUEST, "Введен невалидный email");
+        expectMessageFromPost(USER_EP, INVALID_CREATE_USER_REQUEST, BAD_REQUEST, "Введен невалидный email");
         verify(facade, times(0)).save(any());
     }
 
     @Test
     void save_shouldReturn500() throws Exception {
-        when(facade.save(VALID_CREATE_JOHN_DOE_REQUEST)).thenThrow(new InternalError());
+        when(facade.save(VALID_CREATE_USER_REQUEST)).thenThrow(new InternalError());
 
-        expectMessageFromPost(USER_EP, VALID_CREATE_JOHN_DOE_REQUEST, INTERNAL_SERVER_ERROR, "Внутренняя ошибка сервера");
+        expectMessageFromPost(USER_EP, VALID_CREATE_USER_REQUEST, INTERNAL_SERVER_ERROR, "Внутренняя ошибка сервера");
     }
 
     @Test
     void updateById_shouldReturn200() throws Exception {
-        when(facade.updateById(1L, VALID_UPDATE_JOHN_DOE_REQUEST)).thenReturn(UPDATED_JOHN_DOE_RESPONSE);
+        when(facade.updateById(1L, VALID_UPDATE_USER_REQUEST)).thenReturn(UPDATED_USER_RESPONSE);
 
-        expectBodyFromPut(createUrl(USER_EP, ID), VALID_UPDATE_USER_JSON, OK, UPDATED_JOHN_DOE_RESPONSE);
-        verify(facade, times(1)).updateById(1L, VALID_UPDATE_JOHN_DOE_REQUEST);
+        expectBodyFromPut(createUrl(USER_EP, ID), VALID_UPDATE_USER_JSON, OK, UPDATED_USER_RESPONSE);
+        verify(facade, times(1)).updateById(1L, VALID_UPDATE_USER_REQUEST);
     }
 
     @Test
@@ -119,7 +119,7 @@ class UserControllerTest extends MockMvcTest {
 
     @Test
     void updateById_shouldReturn500() throws Exception {
-        when(facade.updateById(1L, VALID_UPDATE_JOHN_DOE_REQUEST)).thenThrow(new InternalError());
+        when(facade.updateById(1L, VALID_UPDATE_USER_REQUEST)).thenThrow(new InternalError());
 
         expectMessageFromPut(createUrl(USER_EP, ID), VALID_UPDATE_USER_JSON, INTERNAL_SERVER_ERROR, "Внутренняя ошибка сервера");
     }

@@ -7,7 +7,7 @@ import java.util.List;
 
 public class UserResponseExamples {
 
-    public final static UserResponse CREATED_JOHN_DOE_RESPONSE = UserResponse.builder()
+    public final static UserResponse CREATED_USER_RESPONSE = UserResponse.builder()
             .id(1L)
             .name("John Doe")
             .age(23)
@@ -16,9 +16,9 @@ public class UserResponseExamples {
             .registrationDate(LocalDateTime.of(2022, 3, 22, 0, 0, 0))
             .build();
 
-    public final static List<UserResponse> USER_INFO_RESPONSE_LIST = List.of(CREATED_JOHN_DOE_RESPONSE);
+    public final static List<UserResponse> USER_RESPONSE_LIST = List.of(CREATED_USER_RESPONSE);
 
-    public final static UserResponse UPDATED_JOHN_DOE_RESPONSE = UserResponse.builder()
+    public final static UserResponse UPDATED_USER_RESPONSE = UserResponse.builder()
             .id(1L)
             .name("John Doe")
             .age(23)

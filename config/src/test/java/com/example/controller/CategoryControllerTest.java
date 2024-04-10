@@ -6,16 +6,16 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
-import static com.example.entity_examples.category.CategoryJsonExamples.INVALID_UPDATE_SPORT_CATEGORY_JSON;
-import static com.example.entity_examples.category.CategoryJsonExamples.VALID_UPDATE_SPORT_CATEGORY_JSON;
-import static com.example.entity_examples.category.CategoryRequestExamples.INVALID_CREATE_SPORT_CATEGORY_REQUEST;
+import static com.example.entity_examples.category.CategoryJsonExamples.INVALID_UPDATE_CATEGORY_JSON;
+import static com.example.entity_examples.category.CategoryJsonExamples.VALID_UPDATE_CATEGORY_JSON;
+import static com.example.entity_examples.category.CategoryRequestExamples.INVALID_CREATE_CATEGORY_REQUEST;
 import static com.example.entity_examples.category.CategoryRequestExamples.SIMPLE_CATEGORY_FILTER;
-import static com.example.entity_examples.category.CategoryRequestExamples.VALID_CREATE_SPORT_CATEGORY_REQUEST;
-import static com.example.entity_examples.category.CategoryRequestExamples.VALID_UPDATE_SPORT_CATEGORY_REQUEST;
-import static com.example.entity_examples.category.CategoryResponseExamples.FULL_SPORT_CATEGORY_RESPONSE;
+import static com.example.entity_examples.category.CategoryRequestExamples.VALID_CREATE_CATEGORY_REQUEST;
+import static com.example.entity_examples.category.CategoryRequestExamples.VALID_UPDATE_CATEGORY_REQUEST;
+import static com.example.entity_examples.category.CategoryResponseExamples.FULL_CATEGORY_RESPONSE;
 import static com.example.entity_examples.category.CategoryResponseExamples.SHORT_CATEGORY_RESPONSE_LIST;
-import static com.example.entity_examples.category.CategoryResponseExamples.SHORT_SPORT_CATEGORY_RESPONSE;
-import static com.example.entity_examples.category.CategoryResponseExamples.SHORT_UPDATED_SPORT_CATEGORY_RESPONSE;
+import static com.example.entity_examples.category.CategoryResponseExamples.SHORT_CATEGORY_RESPONSE;
+import static com.example.entity_examples.category.CategoryResponseExamples.SHORT_UPDATED_CATEGORY_RESPONSE;
 import static com.example.util.MockMvcUtils.createUrl;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doThrow;
@@ -36,9 +36,9 @@ class CategoryControllerTest extends MockMvcTest {
 
     @Test
     void findById_shouldReturn200() throws Exception {
-        when(facade.findById(1L)).thenReturn(FULL_SPORT_CATEGORY_RESPONSE);
+        when(facade.findById(1L)).thenReturn(FULL_CATEGORY_RESPONSE);
 
-        expectBodyFromGet(createUrl(CATEGORY_EP, ID), OK, FULL_SPORT_CATEGORY_RESPONSE);
+        expectBodyFromGet(createUrl(CATEGORY_EP, ID), OK, FULL_CATEGORY_RESPONSE);
         verify(facade, times(1)).findById(1L);
     }
 
@@ -79,52 +79,52 @@ class CategoryControllerTest extends MockMvcTest {
 
     @Test
     void save_shouldReturn201() throws Exception {
-        when(facade.save(VALID_CREATE_SPORT_CATEGORY_REQUEST)).thenReturn(SHORT_SPORT_CATEGORY_RESPONSE);
+        when(facade.save(VALID_CREATE_CATEGORY_REQUEST)).thenReturn(SHORT_CATEGORY_RESPONSE);
 
-        expectBodyFromPost(CATEGORY_EP, VALID_CREATE_SPORT_CATEGORY_REQUEST, CREATED, SHORT_SPORT_CATEGORY_RESPONSE);
-        verify(facade, times(1)).save(VALID_CREATE_SPORT_CATEGORY_REQUEST);
+        expectBodyFromPost(CATEGORY_EP, VALID_CREATE_CATEGORY_REQUEST, CREATED, SHORT_CATEGORY_RESPONSE);
+        verify(facade, times(1)).save(VALID_CREATE_CATEGORY_REQUEST);
     }
 
     @Test
     void saveWithEmptyTitle_shouldReturn400() throws Exception {
-        expectMessageFromPost(CATEGORY_EP, INVALID_CREATE_SPORT_CATEGORY_REQUEST, BAD_REQUEST,
+        expectMessageFromPost(CATEGORY_EP, INVALID_CREATE_CATEGORY_REQUEST, BAD_REQUEST,
                 "Нельзя создать категорию с пустым заголовком");
         verify(facade, times(0)).save(any());
     }
 
     @Test
     void save_shouldReturn500() throws Exception {
-        when(facade.save(VALID_CREATE_SPORT_CATEGORY_REQUEST)).thenThrow(new InternalError());
+        when(facade.save(VALID_CREATE_CATEGORY_REQUEST)).thenThrow(new InternalError());
 
-        expectMessageFromPost(CATEGORY_EP, VALID_CREATE_SPORT_CATEGORY_REQUEST, INTERNAL_SERVER_ERROR, "Внутренняя ошибка сервера");
+        expectMessageFromPost(CATEGORY_EP, VALID_CREATE_CATEGORY_REQUEST, INTERNAL_SERVER_ERROR, "Внутренняя ошибка сервера");
     }
 
     @Test
     void updateById_shouldReturn200() throws Exception {
-        when(facade.updateById(1L, VALID_UPDATE_SPORT_CATEGORY_REQUEST)).thenReturn(SHORT_UPDATED_SPORT_CATEGORY_RESPONSE);
+        when(facade.updateById(1L, VALID_UPDATE_CATEGORY_REQUEST)).thenReturn(SHORT_UPDATED_CATEGORY_RESPONSE);
 
-        expectBodyFromPut(createUrl(CATEGORY_EP, ID), VALID_UPDATE_SPORT_CATEGORY_JSON, OK, SHORT_UPDATED_SPORT_CATEGORY_RESPONSE);
-        verify(facade, times(1)).updateById(1L, VALID_UPDATE_SPORT_CATEGORY_REQUEST);
+        expectBodyFromPut(createUrl(CATEGORY_EP, ID), VALID_UPDATE_CATEGORY_JSON, OK, SHORT_UPDATED_CATEGORY_RESPONSE);
+        verify(facade, times(1)).updateById(1L, VALID_UPDATE_CATEGORY_REQUEST);
     }
 
     @Test
     void updateByIdWithBlankTitle_shouldReturn400() throws Exception {
-        expectMessageFromPut(createUrl(CATEGORY_EP, ID), INVALID_UPDATE_SPORT_CATEGORY_JSON, BAD_REQUEST,
+        expectMessageFromPut(createUrl(CATEGORY_EP, ID), INVALID_UPDATE_CATEGORY_JSON, BAD_REQUEST,
                 "Нельзя изменить заголовок категории на пустое значение");
         verify(facade, times(0)).updateById(any(), any());
     }
 
     @Test
     void updateByIdWithInvalidId_shouldReturn400() throws Exception {
-        expectStatusFromPut(createUrl(CATEGORY_EP, WRONG_ID), VALID_UPDATE_SPORT_CATEGORY_JSON, BAD_REQUEST);
+        expectStatusFromPut(createUrl(CATEGORY_EP, WRONG_ID), VALID_UPDATE_CATEGORY_JSON, BAD_REQUEST);
         verify(facade, times(0)).updateById(any(), any());
     }
 
     @Test
     void updateById_shouldReturn500() throws Exception {
-        when(facade.updateById(1L, VALID_UPDATE_SPORT_CATEGORY_REQUEST)).thenThrow(new InternalError());
+        when(facade.updateById(1L, VALID_UPDATE_CATEGORY_REQUEST)).thenThrow(new InternalError());
 
-        expectMessageFromPut(createUrl(CATEGORY_EP, ID), VALID_UPDATE_SPORT_CATEGORY_JSON, INTERNAL_SERVER_ERROR, "Внутренняя ошибка сервера");
+        expectMessageFromPut(createUrl(CATEGORY_EP, ID), VALID_UPDATE_CATEGORY_JSON, INTERNAL_SERVER_ERROR, "Внутренняя ошибка сервера");
     }
 
     @Test

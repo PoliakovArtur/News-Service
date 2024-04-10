@@ -9,7 +9,7 @@ import java.util.List;
 
 public class NewsResponseExamples {
 
-    public final static UpdateNewsResponse CREATE_SPORT_NEWS_RESPONSE = UpdateNewsResponse.builder()
+    public final static UpdateNewsResponse CREATE_NEWS_RESPONSE = UpdateNewsResponse.builder()
             .id(1L)
             .title("Football")
             .content("Some info about football")
@@ -18,7 +18,7 @@ public class NewsResponseExamples {
             .build();
 
 
-    public final static UpdateNewsResponse UPDATE_SPORT_NEWS_RESPONSE = UpdateNewsResponse.builder()
+    public final static UpdateNewsResponse UPDATE_NEWS_RESPONSE = UpdateNewsResponse.builder()
             .id(1L)
             .title("Football")
             .content("Some new info about football")
@@ -26,7 +26,7 @@ public class NewsResponseExamples {
             .author("John Doe")
             .build();
 
-    public final static ShortNewsResponse SHORT_SPORT_NEWS_RESPONSE = ShortNewsResponse.builder()
+    public final static ShortNewsResponse SHORT_NEWS_RESPONSE = ShortNewsResponse.builder()
             .id(1L)
             .title("Football")
             .category("Sport")
@@ -35,9 +35,9 @@ public class NewsResponseExamples {
             .commentsCount(3)
             .build();
 
-    public final static List<ShortNewsResponse> SHORT_SPORT_NEWS_RESPONSE_LIST = List.of(SHORT_SPORT_NEWS_RESPONSE);
+    public final static List<ShortNewsResponse> SHORT_NEWS_RESPONSE_LIST = List.of(SHORT_NEWS_RESPONSE);
 
-    public final static FullNewsResponse FULL_SPORT_NEWS_RESPONSE = FullNewsResponse.builder()
+    public final static FullNewsResponse FULL_NEWS_RESPONSE = FullNewsResponse.builder()
             .id(1L)
             .title("Football")
             .category("Sport")

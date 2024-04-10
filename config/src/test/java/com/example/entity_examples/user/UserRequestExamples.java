@@ -6,21 +6,21 @@ import com.example.filter.impl.UserFilter;
 
 public class UserRequestExamples {
 
-    public final static CreateUserRequest VALID_CREATE_JOHN_DOE_REQUEST = CreateUserRequest.builder()
+    public final static CreateUserRequest VALID_CREATE_USER_REQUEST = CreateUserRequest.builder()
             .name("John Doe")
             .age(23)
             .email("example.example@example.com")
             .aboutMe("Like animals")
             .build();
 
-    public final static CreateUserRequest INVALID_CREATE_JOHN_DOE_REQUEST = CreateUserRequest.builder()
+    public final static CreateUserRequest INVALID_CREATE_USER_REQUEST = CreateUserRequest.builder()
             .name("John Doe")
             .age(23)
             .email("exampleexample.com")
             .aboutMe("Like animals")
             .build();
 
-    public final static UpdateUserRequest VALID_UPDATE_JOHN_DOE_REQUEST = UpdateUserRequest.builder()
+    public final static UpdateUserRequest VALID_UPDATE_USER_REQUEST = UpdateUserRequest.builder()
             .aboutMe("Like cats")
             .build();
 
