@@ -28,7 +28,7 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Transactional(readOnly = true)
     @Override
-    public Page<Category> findAll(CategoryFilter filter) {
+    public Iterable<Category> findAll(CategoryFilter filter) {
         return repository.findAll(
                 SortingFilteringUtils.<Category, User>
                                 byJoinedField(filter.getAuthor(), "name", "user")

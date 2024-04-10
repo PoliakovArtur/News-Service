@@ -1,6 +1,6 @@
 package com.example.aop;
 
-import com.example.dto.UpdateDto;
+import com.example.dto.UpdateByUserRequest;
 import com.example.exception.BadRequestException;
 import com.example.service.CategoryService;
 import com.example.service.CommentService;
@@ -28,7 +28,7 @@ public class AuthAspect {
     private NewsService newsService;
 
     @Before("execution(* com.example.facade.*.updateById(..)) && args(id, updateDto)")
-    public void authEditing(JoinPoint joinPoint, Long id, UpdateDto updateDto) {
+    public void authEditing(JoinPoint joinPoint, Long id, UpdateByUserRequest updateDto) {
         Long userIdFromDto = updateDto.getUserId();
         log.info("Вызван метод {}. Аутентификация пользователя с id {} на изменение ресурса",
                 joinPoint.getSignature().getName(), userIdFromDto);

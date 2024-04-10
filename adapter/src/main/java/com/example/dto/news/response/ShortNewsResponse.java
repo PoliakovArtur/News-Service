@@ -1,4 +1,4 @@
-package com.example.dto.comment.response;
+package com.example.dto.news.response;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
@@ -8,17 +8,17 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
-
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class CommentInfoDto {
+public class ShortNewsResponse {
     private Long id;
-    private String content;
+    private String title;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createAt;
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime updateAt;
     private String author;
+    private String category;
+    private Integer commentsCount;
 }
+

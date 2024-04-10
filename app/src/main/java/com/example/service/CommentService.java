@@ -5,7 +5,7 @@ import java.util.List;
 
 public interface CommentService {
 
-    List<Comment> findByNews(Long newsId);
+    Iterable<Comment> findByNews(Long newsId);
 
     Integer countByNews(Long newsId);
 

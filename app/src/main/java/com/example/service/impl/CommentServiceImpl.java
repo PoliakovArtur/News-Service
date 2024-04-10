@@ -29,7 +29,7 @@ public class CommentServiceImpl implements CommentService {
 
     @Transactional(readOnly = true)
     @Override
-    public List<Comment> findByNews(Long newsId) {
+    public Iterable<Comment> findByNews(Long newsId) {
         newsService.checkExistById(newsId);
         return repository.findByNewsId(newsId);
     }

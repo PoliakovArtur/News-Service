@@ -1,10 +1,10 @@
 package com.example.controller;
 
-import com.example.dto.news.request.UpdateNewsDto;
-import com.example.dto.news.response.FullNewsInfoDto;
-import com.example.dto.news.request.CreateNewsDto;
-import com.example.dto.news.response.ShortNewsInfoDto;
-import com.example.dto.news.response.UpdateNewsInfoDto;
+import com.example.dto.news.request.UpdateNewsRequest;
+import com.example.dto.news.response.FullNewsResponse;
+import com.example.dto.news.request.CreateNewsRequest;
+import com.example.dto.news.response.ShortNewsResponse;
+import com.example.dto.news.response.UpdateNewsResponse;
 import com.example.facade.NewsFacade;
 import com.example.filter.impl.NewsFilter;
 import com.example.utils.annotations.swagger.BadRequest;
@@ -46,7 +46,7 @@ public class NewsController {
     )
     @Ok @BadRequest @InternalServerError
     @GetMapping
-    public List<ShortNewsInfoDto> findAll(@Valid NewsFilter filter) {
+    public List<ShortNewsResponse> findAll(@Valid NewsFilter filter) {
         return facade.findAll(filter);
     }
 
@@ -58,7 +58,7 @@ public class NewsController {
     @BadRequest
     @InternalServerError
     @GetMapping("/{id}")
-    public FullNewsInfoDto findById(@PathVariable Long id) {
+    public FullNewsResponse findById(@PathVariable Long id) {
         return facade.findById(id);
     }
 
@@ -69,7 +69,7 @@ public class NewsController {
     @Created
     @NotFound @BadRequest @InternalServerError
     @PostMapping
-    public ResponseEntity<UpdateNewsInfoDto> save(@RequestBody @Valid CreateNewsDto body) {
+    public ResponseEntity<UpdateNewsResponse> save(@RequestBody @Valid CreateNewsRequest body) {
         return ResponseEntity.status(CREATED).body(facade.save(body));
     }
 
@@ -79,9 +79,9 @@ public class NewsController {
     )
     @Ok @NotFound @BadRequest @InternalServerError
     @PutMapping("/{id}")
-    public UpdateNewsInfoDto updateById(@PathVariable("id") Long commentId,
-                                        @RequestBody @Valid UpdateNewsDto body) {
-        return facade.updateById(commentId, body);
+    public UpdateNewsResponse updateById(@PathVariable Long id,
+                                         @RequestBody @Valid UpdateNewsRequest body) {
+        return facade.updateById(id, body);
     }
 
     @Operation(
@@ -91,9 +91,9 @@ public class NewsController {
     @NoContent
     @NotFound @InternalServerError
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteById(@PathVariable("id") Long commentId,
+    public ResponseEntity<Void> deleteById(@PathVariable Long id,
                                            @RequestParam Long userId) {
-        facade.deleteById(userId, commentId);
+        facade.deleteById(userId, id);
         return ResponseEntity.noContent().build();
     }
 }

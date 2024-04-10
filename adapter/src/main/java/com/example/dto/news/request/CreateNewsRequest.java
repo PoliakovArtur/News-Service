@@ -12,10 +12,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class CreateNewsDto {
+public class CreateNewsRequest {
 
     @Schema(description = "Заголовок новости", example = "Биатлон")
-    @NotNull(message = "title является обязательным параметром")
     @NotBlank(message = "Нельзя создать новость с пустым заголовком")
     private String title;
 

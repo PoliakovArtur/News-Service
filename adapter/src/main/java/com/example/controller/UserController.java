@@ -1,9 +1,9 @@
 package com.example.controller;
 
-import com.example.dto.user.request.UpdateUserDto;
+import com.example.dto.user.request.CreateUserRequest;
+import com.example.dto.user.request.UpdateUserRequest;
+import com.example.dto.user.response.UserResponse;
 import com.example.filter.impl.UserFilter;
-import com.example.dto.user.request.CreateUserDto;
-import com.example.dto.user.response.UserInfoDto;
 import com.example.facade.UserFacade;
 import com.example.utils.annotations.swagger.BadRequest;
 import com.example.utils.annotations.swagger.Created;
@@ -42,7 +42,7 @@ public class UserController {
     )
     @Ok @BadRequest @InternalServerError
     @GetMapping
-    public List<UserInfoDto> findAll(@Valid UserFilter filter) {
+    public List<UserResponse> findAll(@Valid UserFilter filter) {
         return facade.findAll(filter);
     }
 
@@ -52,7 +52,7 @@ public class UserController {
     )
     @Ok @NotFound @BadRequest @InternalServerError
     @GetMapping("/{id}")
-    public UserInfoDto findById(@PathVariable Long id) {
+    public UserResponse findById(@PathVariable Long id) {
         return facade.findById(id);
     }
 
@@ -62,7 +62,7 @@ public class UserController {
     )
     @Created @BadRequest @InternalServerError
     @PostMapping
-    public ResponseEntity<UserInfoDto> save(@RequestBody @Valid CreateUserDto body) {
+    public ResponseEntity<UserResponse> save(@RequestBody @Valid CreateUserRequest body) {
         return ResponseEntity.status(CREATED).body(facade.save(body));
     }
 
@@ -72,8 +72,8 @@ public class UserController {
     )
     @Ok @NotFound @BadRequest @InternalServerError
     @PutMapping("/{id}")
-    public UserInfoDto updateById(@PathVariable Long id,
-                                  @RequestBody @Valid UpdateUserDto body) {
+    public UserResponse updateById(@PathVariable Long id,
+                                   @RequestBody @Valid UpdateUserRequest body) {
         return facade.updateById(id, body);
     }
 
@@ -83,7 +83,7 @@ public class UserController {
     )
     @NoContent @NotFound @InternalServerError
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteById(Long id) {
+    public ResponseEntity<Void> deleteById(@PathVariable Long id) {
         facade.deleteById(id);
         return ResponseEntity.noContent().build();
     }

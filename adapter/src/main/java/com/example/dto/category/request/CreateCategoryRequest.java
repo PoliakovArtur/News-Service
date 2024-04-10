@@ -12,14 +12,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class CreateCategoryDto {
+public class CreateCategoryRequest {
     @Schema(description = "Заголовок категории", example = "Спорт")
-    @NotNull(message = "content является обязательным параметром")
     @NotBlank(message = "Нельзя создать категорию с пустым заголовком")
     private String title;
 
     @Schema(description = "Описание категории", example = "Новости о спорте")
-    @NotNull(message = "content является обязательным параметром")
     @NotBlank(message = "Нельзя создать категорию с пустым описанием")
     private String description;
 

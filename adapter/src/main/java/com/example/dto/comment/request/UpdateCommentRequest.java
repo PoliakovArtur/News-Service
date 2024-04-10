@@ -1,22 +1,22 @@
 package com.example.dto.comment.request;
 
-import com.example.dto.UpdateDto;
+import com.example.dto.UpdateByUserRequest;
 import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
+import jakarta.validation.constraints.Pattern;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 
-@AllArgsConstructor
 @NoArgsConstructor
-@Getter
-@Setter
-public class UpdateCommentDto extends UpdateDto {
+@Data
+@EqualsAndHashCode(callSuper = true)
+@SuperBuilder
+public class UpdateCommentRequest extends UpdateByUserRequest {
+
     @Schema(description = "Содержание комментария", example = "Хорошая новость")
-    @NotNull(message = "content является обязательным параметром")
-    @NotBlank(message = "Нельзя изменить содержимое комментария на пустое значение")
+    @Pattern(regexp = ".*\\S.*", message = "Нельзя изменить содержимое комментария на пустое значение")
     private String content;
 
     @Schema(description = "Id новости к которой пишется комментарий", example = "1")

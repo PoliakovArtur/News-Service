@@ -6,7 +6,7 @@ import org.springframework.data.domain.Page;
 
 public interface CategoryService {
 
-    Page<Category> findAll(CategoryFilter filter);
+    Iterable<Category> findAll(CategoryFilter filter);
 
     Category findById(Long id);
 

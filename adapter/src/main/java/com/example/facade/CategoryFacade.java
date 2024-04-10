@@ -1,9 +1,9 @@
 package com.example.facade;
 
-import com.example.dto.category.request.CreateCategoryDto;
-import com.example.dto.category.request.UpdateCategoryDto;
-import com.example.dto.category.response.FullCategoryInfoDto;
-import com.example.dto.category.response.ShortCategoryInfoDto;
+import com.example.dto.category.request.CreateCategoryRequest;
+import com.example.dto.category.request.UpdateCategoryRequest;
+import com.example.dto.category.response.FullCategoryResponse;
+import com.example.dto.category.response.ShortCategoryResponse;
 import com.example.filter.impl.CategoryFilter;
 import com.example.mapper.CategoryMapper;
 import com.example.service.CategoryService;
@@ -19,19 +19,19 @@ public class CategoryFacade {
     private final CategoryService service;
     private final CategoryMapper mapper;
 
-    public List<ShortCategoryInfoDto> findAll(CategoryFilter filter) {
+    public List<ShortCategoryResponse> findAll(CategoryFilter filter) {
         return mapper.toCategoryShortResponseList(service.findAll(filter));
     }
 
-    public FullCategoryInfoDto findById(Long id) {
+    public FullCategoryResponse findById(Long id) {
         return mapper.toCategoryFullResponse(service.findById(id));
     }
 
-    public ShortCategoryInfoDto save(CreateCategoryDto request) {
+    public ShortCategoryResponse save(CreateCategoryRequest request) {
         return mapper.toCategoryShortResponse(service.save(request.getUserId(), mapper.fromDto(request)));
     }
 
-    public ShortCategoryInfoDto updateById(Long categoryId, UpdateCategoryDto request) {
+    public ShortCategoryResponse updateById(Long categoryId, UpdateCategoryRequest request) {
         return mapper.toCategoryShortResponse(service.updateById(categoryId, mapper.fromDto(request)));
     }
 

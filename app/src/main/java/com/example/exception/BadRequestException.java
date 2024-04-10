@@ -1,8 +1,8 @@
 package com.example.exception;
 
-public class BadRequestException extends RuntimeException{
+import lombok.experimental.StandardException;
 
-    public BadRequestException(String message) {
-        super(message);
-    }
+@StandardException
+public class BadRequestException extends RuntimeException {
+
 }

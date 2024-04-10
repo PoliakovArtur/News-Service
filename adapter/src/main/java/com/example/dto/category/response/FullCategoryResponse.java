@@ -1,4 +1,4 @@
-package com.example.dto.news.response;
+package com.example.dto.category.response;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
@@ -12,13 +12,13 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class ShortNewsInfoDto {
+public class FullCategoryResponse {
     private Long id;
     private String title;
+    private String description;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createAt;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime updateAt;
     private String author;
-    private String category;
-    private Integer commentsCount;
 }
-

@@ -5,15 +5,17 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.PositiveOrZero;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 
-@AllArgsConstructor
+@Data
 @NoArgsConstructor
-@Getter
-@Setter
+@EqualsAndHashCode
+@SuperBuilder
 public abstract class Filter {
+
     @Schema(description = "Количество записей на странице", example = "5")
     @NotNull(message = "pageSize является обязательным параметром")
     @Positive(message = "Размер страницы должен быть больше 0")

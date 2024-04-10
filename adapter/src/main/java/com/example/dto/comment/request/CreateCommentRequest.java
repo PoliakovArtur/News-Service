@@ -12,9 +12,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class CreateCommentDto {
+public class CreateCommentRequest {
     @Schema(description = "Содержание комментария", example = "Хорошая новость")
-    @NotNull(message = "content является обязательным параметром")
     @NotBlank(message = "Нельзя создать пустой комментарий")
     private String content;
 

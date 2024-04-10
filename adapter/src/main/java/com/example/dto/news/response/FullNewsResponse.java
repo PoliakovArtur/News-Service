@@ -1,6 +1,6 @@
 package com.example.dto.news.response;
 
-import com.example.dto.comment.response.CommentInfoDto;
+import com.example.dto.comment.response.CommentResponse;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -14,7 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class FullNewsInfoDto {
+public class FullNewsResponse {
     private Long id;
     private String title;
     private String content;
@@ -24,5 +24,5 @@ public class FullNewsInfoDto {
     private LocalDateTime updateAt;
     private String author;
     private String category;
-    private List<CommentInfoDto> comments;
+    private List<CommentResponse> comments;
 }

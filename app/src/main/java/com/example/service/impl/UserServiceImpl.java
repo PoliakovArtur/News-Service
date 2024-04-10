@@ -24,7 +24,7 @@ public class UserServiceImpl implements UserService {
 
     @Transactional(readOnly = true)
     @Override
-    public Page<User> findAll(UserFilter filter) {
+    public Iterable<User> findAll(UserFilter filter) {
         return repository.findAll(
                 byDateTimeRange(
                         filter.getRegisterAfter(),

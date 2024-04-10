@@ -1,9 +1,9 @@
 package com.example.controller;
 
-import com.example.dto.category.request.UpdateCategoryDto;
-import com.example.dto.category.response.FullCategoryInfoDto;
-import com.example.dto.category.request.CreateCategoryDto;
-import com.example.dto.category.response.ShortCategoryInfoDto;
+import com.example.dto.category.request.UpdateCategoryRequest;
+import com.example.dto.category.response.FullCategoryResponse;
+import com.example.dto.category.request.CreateCategoryRequest;
+import com.example.dto.category.response.ShortCategoryResponse;
 import com.example.facade.CategoryFacade;
 import com.example.filter.impl.CategoryFilter;
 import com.example.utils.annotations.swagger.BadRequest;
@@ -45,7 +45,7 @@ public class CategoryController {
     )
     @Ok @BadRequest @InternalServerError
     @GetMapping
-    public List<ShortCategoryInfoDto> findAll(@Valid CategoryFilter filter) {
+    public List<ShortCategoryResponse> findAll(@Valid CategoryFilter filter) {
         return facade.findAll(filter);
     }
 
@@ -55,7 +55,7 @@ public class CategoryController {
     )
     @Ok @NotFound @BadRequest @InternalServerError
     @GetMapping("/{id}")
-    public FullCategoryInfoDto findById(@PathVariable Long id) {
+    public FullCategoryResponse findById(@PathVariable Long id) {
         return facade.findById(id);
     }
 
@@ -65,7 +65,7 @@ public class CategoryController {
     )
     @Created @NotFound @BadRequest @InternalServerError
     @PostMapping
-    public ResponseEntity<ShortCategoryInfoDto> save(@RequestBody @Valid CreateCategoryDto body) {
+    public ResponseEntity<ShortCategoryResponse> save(@RequestBody @Valid CreateCategoryRequest body) {
         return ResponseEntity.status(CREATED).body(facade.save(body));
     }
 
@@ -75,9 +75,9 @@ public class CategoryController {
     )
     @Ok @NotFound @BadRequest @InternalServerError
     @PutMapping("/{id}")
-    public ShortCategoryInfoDto updateById(@PathVariable("id") Long categoryId,
-                                           @RequestBody @Valid UpdateCategoryDto dto) {
-        return facade.updateById(categoryId, dto);
+    public ShortCategoryResponse updateById(@PathVariable Long id,
+                                            @RequestBody @Valid UpdateCategoryRequest dto) {
+        return facade.updateById(id, dto);
     }
 
     @Operation(
@@ -86,9 +86,9 @@ public class CategoryController {
     )
     @NoContent @BadRequest @NotFound @InternalServerError
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteById(@PathVariable("id") Long categoryId,
+    public ResponseEntity<Void> deleteById(@PathVariable Long id,
                                            @RequestParam Long userId) {
-        facade.deleteById(userId, categoryId);
+        facade.deleteById(userId, id);
         return ResponseEntity.noContent().build();
     }
 }

@@ -13,9 +13,11 @@ import com.example.service.UserService;
 import com.example.util.EntityUpdater;
 import com.example.util.SortingFilteringUtils;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.util.Pair;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -36,7 +38,7 @@ public class NewsServiceImpl implements NewsService {
 
     @Transactional(readOnly = true)
     @Override
-    public Map<News, Integer> findAll(NewsFilter filter) {
+    public List<Pair<News, Integer>> findAll(NewsFilter filter) {
         return repository.findAll(
                         SortingFilteringUtils.<News, User>
                                         byJoinedField(filter.getAuthor(), "name", "user")
@@ -46,9 +48,8 @@ public class NewsServiceImpl implements NewsService {
                                 .and(byDateTimeRange(filter.getUpdatedAfter(), filter.getUpdatedBefore(), "updateAt")),
                         getPageableByFilter(filter))
                 .stream()
-                .collect(Collectors.toMap(
-                        Function.identity(),
-                        n -> commentService.countByNews(n.getId())));
+                .map(n -> Pair.of(n, commentService.countByNews(n.getId())))
+                .toList();
     }
 
     @Transactional(readOnly = true)

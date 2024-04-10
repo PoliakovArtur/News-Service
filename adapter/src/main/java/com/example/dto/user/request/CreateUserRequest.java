@@ -2,6 +2,7 @@ package com.example.dto.user.request;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Positive;
 import lombok.AllArgsConstructor;
@@ -13,9 +14,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class UpdateUserDto {
+public class CreateUserRequest {
     @Schema(description = "Имя пользователя", example = "John Doe")
-    @NotBlank(message = "Нельзя изменить имя пользователя на пустое значение")
+    @NotBlank(message = "Нельзя создать пользователя с пустым именем")
     private String name;
 
     @Schema(description = "Возраст", example = "22")
@@ -23,7 +24,8 @@ public class UpdateUserDto {
     private Integer age;
 
     @Schema(description = "Почтовый адрес", example = "example.example@example.ru")
-    @Pattern(regexp = "([a-z0-9]+\\.)*[a-z0-9]+@([a-z]+\\.)+[a-z]{2,3}", message = "Невалидное значение email")
+    @NotNull(message = "email является обязательным параметром")
+    @Pattern(regexp = "([a-z0-9]+\\.)*[a-z0-9]+@([a-z]+\\.)+[a-z]{2,3}", message = "Введен невалидный email")
     private String email;
 
     @Schema(description = "Обо мне", example = "Люблю путешествовать")

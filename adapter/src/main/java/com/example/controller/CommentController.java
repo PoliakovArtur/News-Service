@@ -1,8 +1,8 @@
 package com.example.controller;
 
-import com.example.dto.comment.request.CreateCommentDto;
-import com.example.dto.comment.request.UpdateCommentDto;
-import com.example.dto.comment.response.CommentInfoDto;
+import com.example.dto.comment.request.CreateCommentRequest;
+import com.example.dto.comment.request.UpdateCommentRequest;
+import com.example.dto.comment.response.CommentResponse;
 import com.example.facade.CommentFacade;
 import com.example.utils.annotations.swagger.BadRequest;
 import com.example.utils.annotations.swagger.Created;
@@ -43,7 +43,7 @@ public class CommentController {
     )
     @Ok @BadRequest @NotFound @InternalServerError
     @GetMapping
-    public List<CommentInfoDto> findAll(@RequestParam Long newsId) {
+    public List<CommentResponse> findAll(@RequestParam Long newsId) {
         return facade.findByNews(newsId);
     }
 
@@ -53,7 +53,7 @@ public class CommentController {
     )
     @Ok @NotFound @BadRequest @InternalServerError
     @GetMapping("/{id}")
-    public CommentInfoDto findById(@PathVariable Long id) {
+    public CommentResponse findById(@PathVariable Long id) {
         return facade.findById(id);
     }
 
@@ -64,7 +64,7 @@ public class CommentController {
     @Created
     @NotFound @BadRequest @InternalServerError
     @PostMapping
-    public ResponseEntity<CommentInfoDto> save(@RequestBody @Valid CreateCommentDto body) {
+    public ResponseEntity<CommentResponse> save(@RequestBody @Valid CreateCommentRequest body) {
         return ResponseEntity.status(CREATED).body(facade.save(body));
     }
 
@@ -74,9 +74,9 @@ public class CommentController {
     )
     @Ok @NotFound @BadRequest @InternalServerError
     @PutMapping("/{id}")
-    public CommentInfoDto updateById(@PathVariable("id") Long commentId,
-                                     @RequestBody @Valid  UpdateCommentDto body) {
-        return facade.updateById(commentId, body);
+    public CommentResponse updateById(@PathVariable Long id,
+                                      @RequestBody @Valid UpdateCommentRequest body) {
+        return facade.updateById(id, body);
     }
 
     @Operation(
@@ -85,9 +85,9 @@ public class CommentController {
     )
     @NoContent @BadRequest @NotFound @InternalServerError
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteById(@PathVariable("id") Long commentId,
+    public ResponseEntity<Void> deleteById(@PathVariable Long id,
                                            @RequestParam Long userId) {
-        facade.deleteById(userId, commentId);
+        facade.deleteById(userId, id);
         return ResponseEntity.noContent().build();
     }
 }
